@@ -45,11 +45,14 @@
 .site-footer .col-header,
 .trending-guides .col-header {
   text-align: center;
-  font-family: var(--font-family-sans-serif);
   font-weight: 700;
   font-size: 16px;
   padding: 0 15px 15px;
   margin-bottom: 0;
+}
+
+.site-footer h2 {
+  line-height: 1.1;
 }
 
 .trending-guides-articles {
@@ -121,6 +124,12 @@ p.footer-donation a:hover {
   justify-content: center;
   align-items: center;
   gap: 16px;
+}
+
+/* This rule to is ensure the li element doesn't take more space than it needs */
+.mobile-app-container li {
+  display: flex;
+  flex: initial;
 }
 
 .mobile-app-container img {

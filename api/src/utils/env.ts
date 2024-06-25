@@ -48,7 +48,6 @@ assert.ok(isAllowedProvider(process.env.EMAIL_PROVIDER));
 assert.ok(process.env.AUTH0_DOMAIN);
 assert.ok(process.env.AUTH0_AUDIENCE);
 assert.ok(process.env.API_LOCATION);
-assert.ok(process.env.SESSION_SECRET);
 assert.ok(process.env.FCC_ENABLE_SWAGGER_UI);
 assert.ok(process.env.FCC_ENABLE_DEV_LOGIN_MODE);
 assert.ok(process.env.JWT_SECRET);
@@ -82,11 +81,6 @@ if (process.env.FREECODECAMP_NODE_ENV !== 'development') {
     'a_jwt_secret',
     'The JWT secret should be changed from the default value.'
   );
-  assert.notEqual(
-    process.env.SESSION_SECRET,
-    'a_thirty_two_plus_character_session_secret',
-    'The session secret should be changed from the default value.'
-  );
   assert.ok(
     process.env.FCC_ENABLE_DEV_LOGIN_MODE !== 'true',
     'Dev login mode MUST be disabled in production.'
@@ -104,6 +98,7 @@ if (process.env.FREECODECAMP_NODE_ENV !== 'development') {
 }
 
 export const HOME_LOCATION = process.env.HOME_LOCATION;
+export const MAILHOG_HOST = process.env.MAILHOG_HOST ?? 'localhost';
 export const MONGOHQ_URL =
   process.env.NODE_ENV === 'test'
     ? createTestConnectionURL(
@@ -117,7 +112,6 @@ export const AUTH0_DOMAIN = process.env.AUTH0_DOMAIN;
 export const AUTH0_AUDIENCE = process.env.AUTH0_AUDIENCE;
 export const PORT = process.env.PORT || '3000';
 export const API_LOCATION = process.env.API_LOCATION;
-export const SESSION_SECRET = process.env.SESSION_SECRET;
 export const FCC_ENABLE_SWAGGER_UI =
   process.env.FCC_ENABLE_SWAGGER_UI === 'true';
 export const FCC_ENABLE_DEV_LOGIN_MODE =
@@ -126,7 +120,7 @@ export const SENTRY_DSN =
   process.env.SENTRY_DSN === 'dsn_from_sentry_dashboard'
     ? ''
     : process.env.SENTRY_DSN;
-export const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN || 'localhost';
+export const COOKIE_DOMAIN = process.env.COOKIE_DOMAIN;
 export const COOKIE_SECRET = process.env.COOKIE_SECRET;
 export const JWT_SECRET = process.env.JWT_SECRET;
 export const SES_ID = process.env.SES_ID;

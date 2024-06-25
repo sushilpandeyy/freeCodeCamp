@@ -22,7 +22,6 @@ export type MarkdownRemark = {
   fileAbsolutePath: string;
   frontmatter: {
     block: string;
-    isBeta: boolean;
     superBlock: SuperBlocks;
     // TODO: make enum like superBlock
     certification: string;
@@ -117,6 +116,7 @@ export type Characters =
   | 'Brian'
   | 'Candidate'
   | 'David'
+  | 'Delivery Man'
   | 'Expert'
   | 'Jake'
   | 'James'
@@ -158,6 +158,7 @@ export interface FullScene {
 export interface PrerequisiteChallenge {
   id: string;
   title: string;
+  slug?: string;
 }
 
 export type ChallengeWithCompletedNode = {
@@ -176,7 +177,6 @@ export type ChallengeWithCompletedNode = {
 
 export type ChallengeNode = {
   challenge: {
-    audioPath: string;
     block: string;
     certification: string;
     challengeOrder: number;
@@ -207,7 +207,6 @@ export type ChallengeNode = {
     msTrophyId: string;
     notes: string;
     prerequisites: PrerequisiteChallenge[];
-    removeComments: boolean;
     isLocked: boolean;
     isPrivate: boolean;
     order: number;
@@ -224,7 +223,6 @@ export type ChallengeNode = {
     tail: string[];
     template: string;
     tests: Test[];
-    time: string;
     title: string;
     translationPending: boolean;
     url: string;
@@ -391,7 +389,6 @@ export type ChallengeMeta = {
   isFirstStep: boolean;
   nextChallengePath: string | null;
   prevChallengePath: string | null;
-  removeComments: boolean;
   superBlock: SuperBlocks;
   title?: string;
   challengeType?: number;
@@ -424,7 +421,7 @@ export type ChallengeFile = {
   name: string;
   editableRegionBoundaries?: number[];
   usesMultifileEditor?: boolean;
-  error: null | string;
+  error?: unknown;
   head: string;
   tail: string;
   seed: string;

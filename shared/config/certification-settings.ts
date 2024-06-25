@@ -28,6 +28,7 @@ export enum Certification {
   // Upcoming certifications
   UpcomingPython = 'upcoming-python-v8',
   A2English = 'a2-english-for-developers-v8',
+  B1English = 'b1-english-for-developers-v8',
   // Legacy certifications
   LegacyFrontEnd = 'legacy-front-end',
   JsAlgoDataStruct = 'javascript-algorithms-and-data-structures',
@@ -75,7 +76,8 @@ export const legacyFullStackCertification = [
 // showUpcomingChanges is true.
 export const upcomingCertifications = [
   Certification.UpcomingPython,
-  Certification.A2English
+  Certification.A2English,
+  Certification.B1English
 ] as const;
 
 export const certTypes = {
@@ -253,6 +255,33 @@ export const certTypeTitleMap = {
   [certTypes.upcomingPythonV8]: 'Upcoming Python',
   [certTypes.jsAlgoDataStructV8]:
     'JavaScript Algorithms and Data Structures (Beta)'
+};
+
+export type CertSlug = (typeof Certification)[keyof typeof Certification];
+
+export const linkedInCredentialIds = {
+  [Certification.LegacyFrontEnd]: 'lfe',
+  [Certification.LegacyBackEnd]: 'lbe',
+  [Certification.LegacyDataVis]: 'ldv',
+  [Certification.LegacyInfoSecQa]: 'lisaqa',
+  [Certification.LegacyFullStack]: 'lfs',
+  [Certification.RespWebDesign]: 'rwd',
+  [Certification.FrontEndDevLibs]: 'fedl',
+  [Certification.JsAlgoDataStruct]: 'ljaads',
+  [Certification.DataVis]: 'dv',
+  [Certification.BackEndDevApis]: 'bedaa',
+  [Certification.QualityAssurance]: 'qa',
+  [Certification.InfoSec]: 'is',
+  [Certification.SciCompPy]: 'scwp',
+  [Certification.DataAnalysisPy]: 'dawp',
+  [Certification.MachineLearningPy]: 'mlwp',
+  [Certification.RelationalDb]: 'rd',
+  [Certification.CollegeAlgebraPy]: 'cawp',
+  [Certification.FoundationalCSharp]: 'fcswm',
+  [Certification.UpcomingPython]: 'up',
+  [Certification.JsAlgoDataStructNew]: 'jaads',
+  [Certification.A2English]: 'a2efd',
+  [Certification.B1English]: 'b1efd'
 };
 
 export const oldDataVizId = '561add10cb82ac38a17513b3';
