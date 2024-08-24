@@ -1,4 +1,4 @@
-import fastifyCookie from '@fastify/cookie';
+import fastifyCookie, { type UnsignResult } from '@fastify/cookie';
 import { FastifyPluginCallback } from 'fastify';
 import fp from 'fastify-plugin';
 
@@ -7,6 +7,14 @@ import {
   COOKIE_SECRET,
   FREECODECAMP_NODE_ENV
 } from '../utils/env';
+
+export { type CookieSerializeOptions } from '@fastify/cookie';
+
+declare module 'fastify' {
+  interface FastifyReply {
+    clearOurCookies: () => void;
+  }
+}
 
 /**
  * Signs a cookie value by prefixing it with "s:" and using the COOKIE_SECRET.
@@ -23,7 +31,7 @@ export const sign = (value: string) =>
  * @param rawValue The signed cookie value.
  * @returns The unsigned cookie value.
  */
-export const unsign = (rawValue: string) => {
+export const unsign = (rawValue: string): UnsignResult => {
   const prefix = rawValue.slice(0, 2);
   if (prefix !== 's:') return { valid: false, renew: false, value: null };
 
@@ -58,7 +66,13 @@ const cookies: FastifyPluginCallback = (fastify, _options, done) => {
     }
   });
 
+  void fastify.decorateReply('clearOurCookies', function () {
+    void this.clearCookie('jwt_access_token');
+    void this.clearCookie('_csrf');
+    void this.clearCookie('csrf_token');
+  });
+
   done();
 };
 
-export default fp(cookies);
+export default fp(cookies, { name: 'cookies' });
